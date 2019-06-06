@@ -10,7 +10,8 @@ type LLNode struct {
 }
 
 type LinkedList struct {
-    head  *LLNode
+    head    *LLNode
+    tail    *LLNode
     Length  int     // Length (count of node) of linked list
 }
 
@@ -25,14 +26,12 @@ func CreateFromSlice(slice []int) *LinkedList {
 // Add node to tail of linked list
 func (ll *LinkedList) AppendTail(value int) {
     if ll.head == nil {
-        ll.head = new(LLNode)
-        ll.head.value = value
+        ll.head = &LLNode{value, nil}
+        ll.tail = ll.head
         ll.Length = 1
     } else {
-        nn := ll.head
-        for ; nn.next != nil; nn = nn.next {}
-        nn.next = new(LLNode)
-        nn.next.value = value
+        ll.tail.next = &LLNode{value, nil}
+        ll.tail = ll.tail.next
         ll.Length++
     }
 }
@@ -49,14 +48,6 @@ func (ll *LinkedList) ToArray() (*[]int) {
         ii++
     }
     return &a
-}
-
-// Starting from specified head node returns node at position index
-func get_node_at_index(head *LLNode, index int) (*LLNode) {
-    if index == 0 || head == nil {
-        return head
-    }
-    return get_node_at_index(head.next, index - 1)
 }
 
 // Print out each value in linked list

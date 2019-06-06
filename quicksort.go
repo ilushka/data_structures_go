@@ -78,8 +78,8 @@ func (ll *LinkedList) QuickSort() {
     if ll.Length == 0 || ll.Length == 1 {
         return
     }
-    tail := get_node_at_index(ll.head, ll.Length - 1)
-    new_head, _ := qs_sort(ll.head, tail)
+    new_head, new_tail := qs_sort(ll.head, ll.tail)
     ll.head = new_head
+    ll.tail = new_tail
 }
 

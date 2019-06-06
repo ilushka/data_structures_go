@@ -1,4 +1,4 @@
-package data_structures_go
+package linked_list
 
 // Quicksort partitioning based on selected pivot. Uses tail node as pivot aka. Lomuto scheme.
 func qs_partition(head *LLNode, tail *LLNode) (*LLNode, *LLNode, *LLNode, *LLNode, *LLNode) {

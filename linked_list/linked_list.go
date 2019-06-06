@@ -1,4 +1,4 @@
-package data_structures_go
+package linked_list
 
 import (
     "fmt"

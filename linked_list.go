@@ -11,9 +11,10 @@ type LLNode struct {
 
 type LinkedList struct {
     head  *LLNode
-    Length  int
+    Length  int     // Length (count of node) of linked list
 }
 
+// Add node to tail of linked list
 func (ll *LinkedList) AppendTail(value int) {
     if ll.head == nil {
         ll.head = new(LLNode)
@@ -28,6 +29,7 @@ func (ll *LinkedList) AppendTail(value int) {
     }
 }
 
+// Returns array of values in linked list
 func (ll *LinkedList) ToArray() (*[]int) {
     if ll.Length == 0 {
         return nil
@@ -41,6 +43,7 @@ func (ll *LinkedList) ToArray() (*[]int) {
     return &a
 }
 
+// Starting from specified head node returns node at position index
 func get_node_at_index(head *LLNode, index int) (*LLNode) {
     if index == 0 || head == nil {
         return head
@@ -48,6 +51,7 @@ func get_node_at_index(head *LLNode, index int) (*LLNode) {
     return get_node_at_index(head.next, index - 1)
 }
 
+// Print out each value in linked list
 func print_list(head *LLNode) {
     for ; head != nil; head = head.next {
         fmt.Printf("v: %d, ", head.value)
@@ -55,6 +59,7 @@ func print_list(head *LLNode) {
     fmt.Printf("\n")
 }
 
+// Quicksort partitioning based on selected pivot. Uses tail node as pivot aka. Lomuto scheme.
 func qs_partition(head *LLNode, tail *LLNode) (*LLNode, *LLNode, *LLNode, *LLNode, *LLNode) {
     if head.next == nil || head == nil || tail == nil {
         return nil, nil, nil, nil, nil
@@ -92,6 +97,7 @@ func qs_partition(head *LLNode, tail *LLNode) (*LLNode, *LLNode, *LLNode, *LLNod
     return min_hd, min_tl, tail, max_hd, max_tl
 }
 
+// Recursion portion of Quicksort
 func qs_sort(head *LLNode, tail *LLNode) (*LLNode, *LLNode) {
     if head == nil {
         return nil, nil
@@ -126,6 +132,7 @@ func qs_sort(head *LLNode, tail *LLNode) (*LLNode, *LLNode) {
     return new_head, new_tail
 }
 
+// Sort linked list using Quicksort
 func (ll *LinkedList) QuickSort() {
     if ll.Length == 0 || ll.Length == 1 {
         return

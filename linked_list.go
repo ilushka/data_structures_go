@@ -14,6 +14,14 @@ type LinkedList struct {
     Length  int     // Length (count of node) of linked list
 }
 
+func CreateFromSlice(slice []int) *LinkedList {
+    ll := new(LinkedList)
+    for _, v := range slice {
+        ll.AppendTail(v)
+    }
+    return ll
+}
+
 // Add node to tail of linked list
 func (ll *LinkedList) AppendTail(value int) {
     if ll.head == nil {

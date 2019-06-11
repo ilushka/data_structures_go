@@ -8,11 +8,11 @@ type Queue struct {
     linked_list.LinkedList
 }
 
-func (q *Queue)Push(value int) {
+func (q *Queue) Push(value int) {
     q.Append(value)
 }
 
-func (q *Queue)Pop() (int, error) {
+func (q *Queue) Pop() (int, error) {
     val, err := q.Get(0)
     if err != nil {
         return 0, err

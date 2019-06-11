@@ -26,7 +26,7 @@ func TestQueue(t *testing.T) {
         t.Errorf("Queue length should be 1")
     }
 
-    // Try poping of empty queue
+    // Try poping off of empty queue
     q.Pop()
     if _, err := q.Pop(); err == nil {
         t.Errorf("Should not be able to pop off element from empty queue")

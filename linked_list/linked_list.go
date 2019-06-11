@@ -103,4 +103,25 @@ func (ll *LinkedList) ToArray() (*[]int) {
     return &a
 }
 
+// Delete node at specified index
+func (ll *LinkedList) Remove(index int) (error) {
+    if ll.Length == 0 {
+        return fmt.Errorf("Linked list is empty")
+    }
+    if index >= ll.Length || index < 0 {
+        return fmt.Errorf("Node does not exist at index %d", index)
+    }
+    p, c := get(nil, ll.head, index)
+    if p == nil {
+        ll.head = ll.head.next
+    } else {
+        p.next = c.next
+    }
+    if c == ll.tail {
+        ll.tail = p
+    }
+    ll.Length--
+    return nil
+}
+
 

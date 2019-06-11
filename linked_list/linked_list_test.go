@@ -111,3 +111,52 @@ func TestQuickSortEqualValues2(t *testing.T) {
         }
     }
 }
+
+func TestRemove(t *testing.T) {
+    // Attempt to remove node from empty list
+    ll := new(LinkedList)
+    if err := ll.Remove(0); err == nil {
+        t.Errorf("Should not be able to delete node at index 0 of an empty list")
+    }
+
+    // Attempt to remove non-existing node
+    ll.Append(555)
+    if err := ll.Remove(1); err == nil {
+        t.Errorf("Should not be able to delete node at index 1 of a list of length 1")
+    }
+    if err := ll.Remove(0); err != nil || ll.Length != 0{
+        t.Errorf("Failed to delete only node in list")
+    }
+
+    // Attempt to remove tail
+    ll.Append(555)
+    ll.Append(666)
+    ll.Append(777)
+    if ll.Length != 3 {
+        t.Errorf("Linked list should be of length 3")
+    }
+    if err := ll.Remove(2); err != nil {
+        t.Errorf("Should be able to remove node at index 2")
+    }
+    if val, err := ll.Get(ll.Length - 1); err != nil || val != 666 {
+        t.Errorf("Failed to properly delete tail of the list")
+    }
+
+    // Attempt to remove node in the middle
+    ll.Append(888)
+    ll.Append(5)
+    ll.Append(1000)
+    ll.Append(600)
+    ll.QuickSort()
+    // Delete node 666
+    if err := ll.Remove(3); err != nil {
+        t.Errorf("Failed to properly delete node at index 3")
+    }
+    expected := [...]int{5, 555, 600, 888, 1000}
+    for ii, vv := range *ll.ToArray() {
+        if vv != expected[ii] {
+            t.Errorf("Sorted linked list's node #%d should have value of %d", ii, expected[ii])
+        }
+    }
+}
+
